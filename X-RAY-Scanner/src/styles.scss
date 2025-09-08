@@ -1,1 +1,199 @@
-/* You can add global styles to this file, and also import other style files */
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+
+// Variables globales para mantener consistencia
+:root {
+  // Colores principales
+  --primary-gradient: linear-gradient(135deg, #4f46e5, #7c3aed);
+  --background-gradient: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  --surface-color: rgba(255, 255, 255, 0.95);
+  --surface-border: rgba(255, 255, 255, 0.2);
+
+  // Colores de texto
+  --text-primary: #1e293b;
+  --text-secondary: #64748b;
+  --text-muted: #94a3b8;
+
+  // Colores de estado
+  --success-color: #10b981;
+  --error-color: #dc2626;
+  --warning-color: #f59e0b;
+  --info-color: #3b82f6;
+
+  // Espaciados
+  --spacing-xs: 0.25rem;
+  --spacing-sm: 0.5rem;
+  --spacing-md: 1rem;
+  --spacing-lg: 1.5rem;
+  --spacing-xl: 2rem;
+  --spacing-2xl: 2.5rem;
+  --spacing-3xl: 3rem;
+
+  // Border radius
+  --radius-sm: 8px;
+  --radius-md: 12px;
+  --radius-lg: 16px;
+  --radius-xl: 20px;
+  --radius-2xl: 24px;
+
+  // Sombras
+  --shadow-sm: 0 4px 6px -1px rgba(0, 0, 0, 0.1), 0 2px 4px -1px rgba(0, 0, 0, 0.06);
+  --shadow-md: 0 10px 15px -3px rgba(0, 0, 0, 0.1), 0 4px 6px -2px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 20px 25px -5px rgba(0, 0, 0, 0.1), 0 10px 10px -5px rgba(0, 0, 0, 0.04);
+  --shadow-xl: 0 32px 64px rgba(0, 0, 0, 0.15), 0 16px 32px rgba(0, 0, 0, 0.1);
+
+  // Transiciones
+  --transition-base: all 0.3s cubic-bezier(0.4, 0, 0.2, 1);
+  --transition-slow: all 0.5s cubic-bezier(0.4, 0, 0.2, 1);
+}
+
+// Reset y configuración base
+*, *::before, *::after {
+  box-sizing: border-box;
+}
+
+* {
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  line-height: 1.5;
+  -webkit-font-smoothing: antialiased;
+  -moz-osx-font-smoothing: grayscale;
+}
+
+body {
+  font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+  font-weight: 400;
+  color: var(--text-primary);
+  background: var(--background-gradient);
+  min-height: 100vh;
+  margin: 0;
+  padding: 0;
+  position: relative;
+  overflow-x: hidden;
+}
+
+// Asegurar que el body cubra toda la pantalla
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+body::before {
+  content: '';
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: var(--background-gradient);
+  z-index: -1;
+}
+
+// Clases utilitarias globales (para futuros componentes)
+.glass-effect {
+  background: var(--surface-color);
+  backdrop-filter: blur(20px);
+  border: 1px solid var(--surface-border);
+}
+
+.gradient-text {
+  background: var(--primary-gradient);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
+}
+
+// Animaciones globales
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(30px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+@keyframes float {
+  0%, 100% {
+    transform: translateY(0px);
+  }
+  50% {
+    transform: translateY(-20px);
+  }
+}
+
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes shake {
+  0%, 100% { transform: translateX(0); }
+  10%, 30%, 50%, 70%, 90% { transform: translateX(-5px); }
+  20%, 40%, 60%, 80% { transform: translateX(5px); }
+}
+
+// Clases para animaciones
+.animate-slideUp {
+  animation: slideUp 0.6s ease-out;
+}
+
+.animate-fadeIn {
+  animation: fadeIn 0.4s ease-out;
+}
+
+.animate-shake {
+  animation: shake 0.5s ease-in-out;
+}
+
+// Estados de carga globales
+.loading {
+  pointer-events: none;
+  opacity: 0.7;
+}
+
+.loading::after {
+  content: '';
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  width: 20px;
+  height: 20px;
+  margin: -10px 0 0 -10px;
+  border: 2px solid transparent;
+  border-top: 2px solid currentColor;
+  border-radius: 50%;
+  animation: spin 1s linear infinite;
+}
+
+@keyframes spin {
+  0% { transform: rotate(0deg); }
+  100% { transform: rotate(360deg); }
+}
+
+// Responsive breakpoints
+@mixin mobile {
+  @media (max-width: 768px) {
+    @content;
+  }
+}
+
+@mixin tablet {
+  @media (min-width: 769px) and (max-width: 1024px) {
+    @content;
+  }
+}
+
+@mixin desktop {
+  @media (min-width: 1025px) {
+    @content;
+  }
+}
