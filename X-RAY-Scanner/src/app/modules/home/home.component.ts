@@ -16,6 +16,8 @@ export class HomeComponent {
   @ViewChild('messageInput') messageInput!: ElementRef;
 
   previewImage: string | null = null;
+  selectedFile: File | null = null;
+  responseMessage: string | null = null;
   showTitle: boolean = true;
   movedDown: boolean = false;
   offset: number = 200;
@@ -29,13 +31,24 @@ export class HomeComponent {
 
   // Solo para limpiar input cuando presionas enviar
   sendMessage() {
-    if (this.previewImage) {
-      console.log('Imagen enviada:', this.previewImage);
-      this.previewImage = null; // limpia previsualización
+    if (this.selectedFile) {
+      this.analyzeService.analyze(this.selectedFile).subscribe({
+        next: (res) => {
+          console.log('✅ Respuesta del backend:', res);
+          this.responseMessage = res.message;
+        },
+        error: (err) => {
+          console.error('❌ Error enviando imagen:', err);
+        }
+      });
+
+      // Limpieza de UI
+      this.previewImage = null;
+      this.selectedFile = null;
       this.movedDown = true;
       this.showTitle = false;
-
     }
+
     this.messageInput.nativeElement.value = '';
   }
 
@@ -47,15 +60,16 @@ export class HomeComponent {
       const file = input.files[0];
 
       if (file.type.startsWith('image/')) {
+        this.selectedFile = file;   // ✅ guarda el archivo real
         const reader = new FileReader();
         reader.onload = () => {
-          this.previewImage = reader.result as string; // guarda preview
+          this.previewImage = reader.result as string; // preview base64
           this.movedDown = false;
-          
         };
         reader.readAsDataURL(file);
       } else {
-        this.previewImage = null; // ignora si no es imagen
+        this.previewImage = null;
+        this.selectedFile = null;
       }
     }
   }

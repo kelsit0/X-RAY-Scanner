@@ -58,42 +58,50 @@
 
 <!--Chat-->
 
-<div class="chat-placeholder">
-  <h2 class="chat-title" *ngIf="showTitle">
-    ¿Que analizaremos hoy?
-  </h2>
+  <div class="chat-placeholder">
+    <h2 class="chat-title" *ngIf="showTitle">
+      ¿Que analizaremos hoy?
+    </h2>
 
-  <div
-    class="chat-input-box"
-    [class.moved-down]="movedDown"
-    [ngStyle]="{ 'bottom.px': movedDown ? offset : 40 }"
-  >
-    <input
-      type="text"
-      placeholder="Agregue su imagen..."
-      class="chat-input"
-      #messageInput
-      disabled
-    />
-
-    <div class="chat-actions">
+    <div
+      class="chat-input-box"
+      [class.moved-down]="movedDown"
+      [ngStyle]="{ 'bottom.px': movedDown ? offset : 40 }"
+    >
       <input
-        type="file"
-        #fileInput
-        (change)="onFileSelected($event)"
-        hidden
-        accept="image/*"
+        type="text"
+        placeholder="Agregue su imagen..."
+        class="chat-input"
+        #messageInput
+        disabled
       />
-      <button class="attach-btn" (click)="fileInput.click()">📎</button>
-      <button class="send-btn" (click)="sendMessage()">➤</button>
+
+      <div class="chat-actions">
+        <input
+          type="file"
+          #fileInput
+          (change)="onFileSelected($event)"
+          hidden
+          accept="image/*"
+        />
+        <button class="attach-btn" (click)="fileInput.click()">📎</button>
+        <button class="send-btn" (click)="sendMessage()">➤</button>
+      </div>
     </div>
+
+    <!-- Previsualización -->
+    <div class="preview-container" *ngIf="previewImage">
+      <img [src]="previewImage" alt="Previsualización" class="preview-image" />
+    </div>
+
+
+    <div *ngIf="responseMessage" class="response-box">
+      {{ responseMessage }}
+    </div>
+
   </div>
 
-  <!-- Previsualización -->
-  <div class="preview-container" *ngIf="previewImage">
-    <img [src]="previewImage" alt="Previsualización" class="preview-image" />
-  </div>
-</div>
+
 
 </div>
 
