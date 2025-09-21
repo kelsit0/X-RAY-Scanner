@@ -510,6 +510,11 @@
   width: 600px;
   max-width: 90%;
   border: 1px solid #e2e8f0;
+  transition: margin-top 0.4s ease;
+}
+
+.chat-input-box.moved-down {
+  transform: translateY(350px); // baja el input 200px
 }
 
 .chat-input {
@@ -579,4 +584,27 @@
     background: #e2e8f0;
     color: #4f46e5;
   }
+}
+
+.chat-image {
+  max-width: 220px;
+  max-height: 220px;
+  border-radius: 12px;
+  object-fit: cover;
+  display: block;
+}
+
+/* Preview */
+.preview-container {
+  margin-top: 2rem;
+  display: flex;
+  justify-content: center;
+}
+
+.preview-image {
+  max-width: 300px;
+  max-height: 300px;
+  border-radius: 12px;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
+  object-fit: cover;
 }

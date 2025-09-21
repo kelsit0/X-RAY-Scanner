@@ -59,22 +59,41 @@
 <!--Chat-->
 
 <div class="chat-placeholder">
-  <h2 class="chat-title">
-    ¿Cómo puedo ayudarte hoy?
+  <h2 class="chat-title" *ngIf="showTitle">
+    ¿Que analizaremos hoy?
   </h2>
 
-  <div class="chat-input-box">
+  <div
+    class="chat-input-box"
+    [class.moved-down]="movedDown"
+    [ngStyle]="{ 'bottom.px': movedDown ? offset : 40 }"
+  >
     <input
       type="text"
-      placeholder="Escribe tu mensaje aquí..."
+      placeholder="Agregue su imagen..."
       class="chat-input"
+      #messageInput
+      disabled
     />
 
     <div class="chat-actions">
-      <button class="attach-btn">📎</button>
-      <button class="send-btn">➤</button>
+      <input
+        type="file"
+        #fileInput
+        (change)="onFileSelected($event)"
+        hidden
+        accept="image/*"
+      />
+      <button class="attach-btn" (click)="fileInput.click()">📎</button>
+      <button class="send-btn" (click)="sendMessage()">➤</button>
     </div>
   </div>
+
+  <!-- Previsualización -->
+  <div class="preview-container" *ngIf="previewImage">
+    <img [src]="previewImage" alt="Previsualización" class="preview-image" />
+  </div>
+</div>
 
 </div>
 
