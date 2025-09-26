@@ -101,7 +101,25 @@
 
   </div>
 
-
+<!-- Zona de mensajes -->
+<div class="messages-container" *ngIf="messages.length > 0">
+  <div class="messages">
+    <div
+      class="message"
+      *ngFor="let msg of messages"
+      [ngClass]="{ 'sent': msg.type === 'sent', 'received': msg.type === 'received' }"
+    >
+      <div class="message-content">
+        <ng-container *ngIf="msg.isImage; else textMsg">
+          <img [src]="msg.content" alt="Imagen enviada" class="chat-image" />
+        </ng-container>
+        <ng-template #textMsg>
+          <p>{{ msg.content }}</p>
+        </ng-template>
+      </div>
+    </div>
+  </div>
+</div>
 
 </div>
 
