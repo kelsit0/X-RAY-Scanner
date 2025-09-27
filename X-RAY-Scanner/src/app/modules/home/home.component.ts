@@ -1,12 +1,13 @@
 import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AnalyzeService } from '../../../services/sendImage.service'; // ✅ Corregir import
+import { AnalyzeService } from '../../../services/sendImage.service';
+import { HubComponent } from "../../Shared/hub/hub.component"; // ✅ Corregir import
 
 @Component({
   selector: 'app-home',
   standalone: true,
-  imports: [CommonModule, FormsModule],
+  imports: [CommonModule, FormsModule, HubComponent],
   templateUrl: './home.component.html',
   styleUrls: ['./home.component.scss'],
 })
