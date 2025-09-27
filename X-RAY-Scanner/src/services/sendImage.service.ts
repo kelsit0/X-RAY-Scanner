@@ -11,8 +11,7 @@ export class AnalyzeService {
 
     analyze(file: File): Observable<any> {
         const formData = new FormData();
-        formData.append('file', file); // "file" debe coincidir con el parámetro del backend
-
+        formData.append('file', file);
         return this.http.post(`${this.apiUrl}/api/analyze`, formData);
     }
 }

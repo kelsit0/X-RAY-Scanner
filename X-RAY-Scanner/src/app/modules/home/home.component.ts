@@ -1,7 +1,7 @@
-import { Component,  ViewChild, ElementRef } from '@angular/core';
+import { Component, ViewChild, ElementRef } from '@angular/core';
 import { CommonModule } from '@angular/common';
 import { FormsModule } from '@angular/forms';
-import { AnalyzeService } from '../../../services/sendImage.service';
+import { AnalyzeService } from '../../../services/sendImage.service'; // ✅ Corregir import
 
 @Component({
   selector: 'app-home',
@@ -24,19 +24,16 @@ export class HomeComponent {
 
   messages: { type: 'sent' | 'received'; content: string; isImage?: boolean }[] = [];
 
-  // Abrir/cerrar chat si lo necesitas en futuro
   isMinimized = false;
 
   toggleChat() {
     this.isMinimized = !this.isMinimized;
   }
 
-  // Solo para limpiar input cuando presionas enviar
-  keepHistory: boolean = true; // cambia a false si quieres limpiar cuando suba otra imagen
+  keepHistory: boolean = true;
 
   sendMessage() {
     if (this.selectedFile) {
-      // Limpia si no quieres historial
       if (!this.keepHistory) {
         this.messages = [];
       }
@@ -51,9 +48,12 @@ export class HomeComponent {
       // Llamar backend
       this.analyzeService.analyze(this.selectedFile).subscribe({
         next: (res) => {
+          // ✅ CORREGIDO: Usar las propiedades correctas del backend
+          const mensajeCompleto = `Diagnóstico: ${res.diagnostico}\n\nExplicación: ${res.explicacion_medica}`;
+          
           this.messages.push({
             type: 'received',
-            content: res.message,
+            content: mensajeCompleto, // ✅ Ahora sí coincide
           });
         },
         error: (err) => {
@@ -74,6 +74,7 @@ export class HomeComponent {
 
     this.messageInput.nativeElement.value = '';
   }
+
   // Manejo de archivos
   onFileSelected(event: Event) {
     const input = event.target as HTMLInputElement;
