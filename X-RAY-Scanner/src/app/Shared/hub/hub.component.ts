@@ -1,6 +1,6 @@
 import { CommonModule } from '@angular/common';
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
+import { Router, RouterLink, RouterLinkActive, RouterModule } from '@angular/router';
 import { Subject } from 'rxjs';
 
 
@@ -12,6 +12,8 @@ import { Subject } from 'rxjs';
   styleUrl: './hub.component.scss'
 })
 export class HubComponent {
+
+  constructor(private router: Router) {}
   public navigationClicks$ = new Subject<string>();
 
   navegar(ruta: string) {

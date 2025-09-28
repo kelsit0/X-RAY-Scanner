@@ -49,7 +49,7 @@ export class LoginComponent {
         this.errorMessage.set('');
 
         // Navegar a home
-        await this.router.navigate(['/home']);
+        await this.router.navigate(['/inicio']);
 
         console.log('Login successful - navigating to home');
 

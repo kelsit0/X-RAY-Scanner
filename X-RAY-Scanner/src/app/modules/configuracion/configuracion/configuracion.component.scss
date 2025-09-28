@@ -1,0 +1,25 @@
+.logout-btn {
+  position: absolute;
+  top: 1.5rem;       // distancia desde arriba
+  right: 30px;       // ancho aproximado del sidebar (ajústalo si tu sidebar mide distinto)
+
+  background: #fff;
+  color: #6b21a8;
+  font-weight: 600;
+  padding: 20px 40px;
+  border-radius: 10px;
+  border: none;
+  cursor: pointer;
+  box-shadow: var(--shadow-sm);
+  transition: var(--transition-base);
+
+  &:hover {
+    background: #f3e8ff;
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
